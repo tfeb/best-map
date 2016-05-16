@@ -4,18 +4,14 @@
 ;;; (such as dreq rows)
 ;;;
 
+(provide best-map (struct-out distance))
+
 (module+ test
   (require rackunit))
 
 (struct distance
   (src tgt d)
   #:transparent)
-
-(define (sorted-distances sources targets metric)
-  (sort (for*/list ([src sources]
-                    [tgt targets])
-          (distance src tgt (metric src tgt)))
-        < #:key distance-d))
 
 (define (best-map sources targets metric)
   ;; The best map is the one most like a bijection
@@ -28,14 +24,19 @@
   ;; assuming sort is n log n
   (let ([ss (mutable-seteqv)]
         [ts (mutable-seteqv)])
-    (values (for/list ([d (sorted-distances sources targets metric)]
+    (values (for/list ([d (sort (for*/list ([src sources]
+                                            [tgt targets])
+                                  (distance src tgt (metric src tgt)))
+                                ;; caching keys makes it a bit faster
+                                ;; as best I can see
+                                < #:key distance-d #:cache-keys? #t)]
                        #:unless (or (set-member? ss (distance-src d))
                                     (set-member? ts (distance-tgt d))))
               (set-add! ss (distance-src d))
               (set-add! ts (distance-tgt d))
               d)
-            (set->list (set-subtract (list->seteqv sources) ss))
-            (set->list (set-subtract (list->seteqv targets) ts)))))
+            (set-subtract (list->seteqv sources) ss)
+            (set-subtract (list->seteqv targets) ts))))
 
 (module+ test
   (provide make-random-points euclidean)
