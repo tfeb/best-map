@@ -12,7 +12,9 @@ def best_map(domain, image, metric,
     if image_key is None:
         image_key = key
     if len(domain) >= 1<<16 or len(image) >= 1<<16:
-        raise ValueError("lengths should be less than 2**16")
+        # Two 65536 elt arrays would require 64GB of memory I think:
+        # don't even think about it.
+        raise ValueError("array lengths should be 16 bit numbers")
     # Compute the values, creating new arrays only if necessary. Doing
     # this in advance means we don't have to care about memoizing the
     # key functions: we will call them for each element of each array

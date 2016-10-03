@@ -1,4 +1,4 @@
-# Bast map package
+# Best map package
 
 from . import bestmap
 from .bestmap import *
