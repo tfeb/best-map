@@ -1,0 +1,28 @@
+# Emacs backups & auto save files
+*~
+\#*\#
+.\#*
+
+# Emacs tags
+TAGS
+
+# OSX rubbish
+.DS_Store
+.localized
+
+# Python bytecode
+*.pyc
+*.pyo
+
+# Python build noise
+build/
+dist/
+*.egg-info
+
+# iPython notebook checkpoints
+.ipynb_checkpoints/
+
+# and some scratch directories
+tmp/
+scratch/
+playing/
