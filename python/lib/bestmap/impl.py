@@ -19,16 +19,16 @@ def best_map(domain, image, metric,
     # this in advance means we don't have to care about memoizing the
     # key functions: we will call them for each element of each array
     # anyway, so this is how big the caches would need to be.
-    dvs = domain if domain_key is None else map(domain_key, domain)
-    ivs = image if image_key is None else map(image_key, image)
-    dlen = len(dvs)
-    ilen = len(ivs)
+    dom = domain if domain_key is None else map(domain_key, domain)
+    img = image if image_key is None else map(image_key, image)
+    dlen = len(dom)
+    ilen = len(img)
     distances = empty((dlen, ilen),
                       dtype=[('x', 'u2'),
                              ('y', 'u2'),
                              ('d', 'float')])
-    for (x, xe) in enumerate(dvs):
-        for (y, ye) in enumerate(ivs):
+    for (x, xe) in enumerate(dom):
+        for (y, ye) in enumerate(img):
             distances[x, y] = (x, y, metric(xe, ye))
     # Reshape the array to be one dimensional, and sort it in
     # increasing order of distance
