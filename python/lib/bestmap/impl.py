@@ -6,7 +6,8 @@ __all__ = ('best_map',)
 from numpy import empty
 
 def best_map(domain, image, metric,
-             key=None, domain_key=None, image_key=None):
+             key=None, domain_key=None, image_key=None,
+             metric_dtype='float'):
     if domain_key is None:
         domain_key = key
     if image_key is None:
@@ -26,7 +27,7 @@ def best_map(domain, image, metric,
     distances = empty((dlen, ilen),
                       dtype=[('x', 'u2'),
                              ('y', 'u2'),
-                             ('d', 'float')])
+                             ('d', metric_dtype)])
     for (x, xe) in enumerate(dom):
         for (y, ye) in enumerate(img):
             distances[x, y] = (x, y, metric(xe, ye))
