@@ -1,0 +1,19 @@
+# Tests of bestmap
+#
+
+language: python
+
+python:
+  # It should work on 2.6 as well as 2.7
+  - "2.6"
+  - "2.7"
+
+install:
+  # We need Numpy
+  - pip install numpy
+
+before_script:
+  - cd python/bestmap
+
+script:
+  - nosetests -v
