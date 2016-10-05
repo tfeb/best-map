@@ -22,6 +22,9 @@ dist/
 # iPython notebook checkpoints
 .ipynb_checkpoints/
 
+# Racket compilation products
+compiled/
+
 # and some scratch directories
 tmp/
 scratch/
