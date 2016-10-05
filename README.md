@@ -1,7 +1,4 @@
 # Computing the best map between two sets of objects
-[This README is extremely preliminary and there is no serious
-documentation at all so far: *caveat emptor*.]
-
 Given two sets of objects (in some kind of container indexed by small
 integers) and a metric function which computes distances between
 objects in one set and objects in another, then this computes the
@@ -19,14 +16,19 @@ which implements the algorithm.  There are unit tests, a `setup.py`
 and so on.  You need [NumPy](http://www.numpy.org/) to use it, and
 [nose](https://nose.readthedocs.io/en/latest/) to run the unit tests.
 
+There is [documentation](python/README.md) for this.
+
 ### `racket`
 This is the original proof-of-concept, implemented in
 [Racket](http://racket-lang.org/).  It has no pretensions to be
-production-quality code: it's just here for the record,
+production-quality code: it's just here for the record.
 
 ## Builds and tests
 [![Build Status](https://travis-ci.org/tfeb/best-map.svg)](https://travis-ci.org/tfeb/best-map)
 
-This status corresponds to
+This [Travis CI](https://travis-ci.org/) status corresponds to
 [`github.com/tfeb/best-map`](https://github.com/tfeb/best-map) and may
 not completely correspond to the status of any other repo.
+
+The Python package is tested: the Racket one is not.  There are unit
+tests for it however, which you can run with `raco test` if you want.
