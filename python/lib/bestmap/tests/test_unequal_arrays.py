@@ -11,8 +11,6 @@ def test_unequal_arrays(iters=100, length=100):
     # from a, and this should correspond to the element we popped from
     # b.
     #
-    def doom(s):
-        raise Exception(s)
     a = range(length)
 
     for i in range(iters):
@@ -22,11 +20,8 @@ def test_unequal_arrays(iters=100, length=100):
         (mapping, unmapped_a, unmapped_b) = best_map(a, b,
                                                      lambda x, y: abs(x - y),
                                                      metric_dtype='i2')
-        if sum(m[2] for m in mapping) > 0:
-            doom("mapping cost greater than zero")
-        if len(unmapped_b) > 0:
-            doom("unmapped elements in image")
-        if len(unmapped_a) != 1:
-            doom("should be a single unmapped element in domain")
-        if a[unmapped_a.pop()] != l:
-            doom("unexpected unmapped element")
+        assert len(mapping) == min(len(a), len(b)), "mapping length wrong"
+        assert sum(m[2] for m in mapping) == 0, "mapping cost greater than zero"
+        assert len(unmapped_b) == 0, "unmapped elements in image"
+        assert len(unmapped_a) == 1, "should be a single unmapped elt in domain"
+        assert a[unmapped_a.pop()] == l, "unexpected unmapped element"

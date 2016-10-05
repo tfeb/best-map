@@ -10,9 +10,6 @@ def test_shuffled_float_array(iters=100, length=100):
     # not epsilon, if you think) cost and no unmapped elements.  Do it
     # a bunch of times.
     #
-    def doom(s):
-        raise Exception(s)
-
     a = [random() for i in range(length)]
     b = [e for e in a]
 
@@ -21,12 +18,12 @@ def test_shuffled_float_array(iters=100, length=100):
         (mapping, unmapped_a, unmapped_b) = best_map(a, b,
                                                      lambda x, y: abs(x - y),
                                                      metric_dtype='double')
+        # Check every element is mapped
+        assert len(mapping) == len(a), "wrong mapping length"
         # Check that there are no unmapped objects
-        if len(unmapped_a) > 0 or len(unmapped_b) > 0:
-            doom("unmapped elements")
-        # Check for zero cost
-        if sum(m[2] for m in mapping) > 0.0:
-            doom("mapping cost greater than zero")
+        assert (len(unmapped_a) == 0
+                and len(unmapped_b) == 0), "unmapped elements"
+        assert sum(m[2] for m in mapping) == 0.0, "mapping cost > zero"
 
 
 def test_shuffled_indexed_array(iters=100, length=100):
@@ -36,9 +33,6 @@ def test_shuffled_indexed_array(iters=100, length=100):
     # should map elements onto their shuffled counterparts.  We do
     # this a bunch of times.
     #
-    def doom(s):
-        raise Exception(s)
-
     a = [(i,i) for i in range(length)]
     b = [e for e in a]
     for i in range(iters):
@@ -47,12 +41,13 @@ def test_shuffled_indexed_array(iters=100, length=100):
                                                      lambda x, y: abs(x - y),
                                                      key=lambda e: e[1],
                                                      metric_dtype='u2')
+        # Check every element is mapped
+        assert len(mapping) == len(a), "wrong mapping length"
         # Check that there are no unmapped objects
-        if len(unmapped_a) > 0 or len(unmapped_b) > 0:
-            doom("unmapped elements")
+        assert (len(unmapped_a) == 0
+                and len(unmapped_b) == 0), "unmapped elements"
         # Check for zero cost
-        if sum(m[2] for m in mapping) > 0:
-            doom("mapping cost greater than zero")
+        assert sum(m[2] for m in mapping) == 0, "mapping cost > zero"
+        # And check the mapping is what we expect it to be
         for (li, ri, c) in mapping:
-            if a[li] != b[ri]:
-                doom("mapping failed miserably")
+            assert a[li] == b[ri], "mapping failed miserably"
