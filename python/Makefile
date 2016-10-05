@@ -30,9 +30,10 @@ veryclean: clean
 	$(PYTHON) setup.py clean
 	rm -rf build
 
+# The tests are slow enough and there are few enough of them it is
+# useful to see them
+#
 test: clean
-	# the tests are slow enough and there are few enough of them
-	# it is useful to see them
 	nosetests -v
 
 # clean and test before installing, just clean before installing for

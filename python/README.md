@@ -1,12 +1,12 @@
 # The best map
-This package provides a function which will compute the 'best map'
+This package provides a function which will compute the best map
 between two sets of objects for a specified metric.
 
 ## The algorithm
-Given an object from each set, the distance, or cost, of the mapping
-between them is given by the metric function.  The best mapping
-between the two sets of objects is then the one which minimises the
-total distance amongst all possible pairings.
+Given an object from each set then the distance, or cost, of the
+mapping between them is given by the metric function.  The best
+mapping between the two sets of objects is then the one which
+minimises the total distance amongst all possible pairings.
 
 This is computed as follows:
 * for each object in the first set, record the distance to each object
@@ -17,7 +17,7 @@ This is computed as follows:
 * continue this until all objects from one set have been used: the
   resulting set of pairings is the best map.
 
-Note that, if the two sets are different sizes then there will be
+Note that if the two sets are different sizes then there will be
 unpaired elements from the larger set.
 
 ## The implementation
@@ -35,8 +35,8 @@ This computes the best mapping between `domain` and `image` using
 
 * `domain` and `image` contain the objects to map.  They need to be
   iterable, and indexable by small integers: `domain[i]` is the `i`th
-  element of `domain` & similarly for `image`. The mapping is computed
-  in terms of indices.
+  element of `domain` & similarly for `image`. The mapping is returned
+  in terms of pairs of indices.
 * `metric` is a function of two arguments which returns the distance
   between its arguments.  The return value needs to be something that
   can be stored in a NumPy array of dtype `metric_dtype`, and needs to
@@ -44,11 +44,9 @@ This computes the best mapping between `domain` and `image` using
 * `key`, `domain_key` and `image_key`, if given, specify functions of
   one argument which are applied to the elements of `domain` and
   `image` and should return a suitable value for an argument to
-  `metric`.  If only `key` is given then it is used for both `domain`
-  and `range`, if `domain_key` or `range_key` is given then it is used
-  for the corresponding argument only.  If you give, say, `key` and
-  `domain_key` only then it is exactly the same as if you had given
-  `domain_key` and `range_key`.
+  `metric`.  If only `key` is given then it is used as the defaul for
+  both `domain` and `range`, if `domain_key` or `range_key` is given
+  then they override the default for the corresponding argument.
 * `metric_dtype` specifies the NumPy `dtype` for the array which holds
   the results of calling `metric`.  See `metric` for constraints on
   this.
@@ -78,7 +76,7 @@ arguments are given then it is called as `metric(domain[i],
 image[j])`.
 
 ## Notes
-You can compute the cost of a mapping by, for example:
+You can compute the cost of a mapping by, for example,
 
 ```python
 (mappings, domain_unmapped, image_unmapped) = best_map(domain, image, metric)

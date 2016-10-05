@@ -1,7 +1,7 @@
 # Computing the best map between two sets of objects
-Given two sets of objects (in some kind of container indexed by small
-integers) and a metric function which computes distances between
-objects in one set and objects in another, then this computes the
+Given two sets of objects, in some kind of container indexed by small
+integers, and a metric function which computes distances between
+objects in one set and objects in another, then this code computes the
 mapping between the two sets which minimises the total distance.
 
 For a long time I thought this must be equivalent to something like
@@ -30,5 +30,6 @@ This [Travis CI](https://travis-ci.org/) status corresponds to
 [`github.com/tfeb/best-map`](https://github.com/tfeb/best-map) and may
 not completely correspond to the status of any other repo.
 
-The Python package is tested: the Racket one is not.  There are unit
-tests for it however, which you can run with `raco test` if you want.
+Travis tests the Python package, but not the Racket module.  There are
+unit tests for it however, which you can run with `raco test` if you
+want (or `make test` in the `racket` directory).
