@@ -90,9 +90,15 @@ def best_map(domain, image, metric,
     unmapped_xs = set(range(dlen))
     unmapped_ys = set(range(ilen))
     mappings = list()
+    remaining = min(dlen, ilen) # how many left to do?
     for (x, y, d) in distances:
         if x in unmapped_xs and y in unmapped_ys:
             mappings.append((x, y, d))
             unmapped_xs.remove(x)
             unmapped_ys.remove(y)
+            remaining -= 1
+            if remaining == 0:
+                # We are done: sanity check and finish
+                assert len(unmapped_xs) == 0 or len(unmapped_ys) == 0, "oops"
+                break
     return (mappings, unmapped_xs, unmapped_ys)
