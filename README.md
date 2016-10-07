@@ -10,15 +10,18 @@ tractable.
 
 ## What is here
 
-### `python`
+`library` contains a Python package implementing the best map, and an
+earlier prototype Racket proof-of-concept version.
+
+### `library/python`
 This contains a Python package, installable with 2.6 and 2.7 at least,
 which implements the algorithm.  There are unit tests, a `setup.py`
 and so on.  You need [NumPy](http://www.numpy.org/) to use it, and
 [nose](https://nose.readthedocs.io/en/latest/) to run the unit tests.
 
-There is [documentation](python/README.md) for this.
+There is [documentation](library/python/README.md) for this.
 
-### `racket`
+### `library/racket`
 This is the original proof-of-concept, implemented in
 [Racket](http://racket-lang.org/).  It has no pretensions to be
 production-quality code: it's just here for the record.

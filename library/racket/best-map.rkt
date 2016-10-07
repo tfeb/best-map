@@ -40,7 +40,7 @@
 
 (module+ test
   (provide make-random-points euclidean)
-  
+
   (define (make-random-points n)
     (for/list ([i n])
       (cons (random) (random))))
