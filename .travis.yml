@@ -1,6 +1,10 @@
 # Tests of bestmap
 #
 
+branches:
+  only:
+    - master
+
 language: python
 
 python:
