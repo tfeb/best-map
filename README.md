@@ -24,12 +24,9 @@ This is the original proof-of-concept, implemented in
 production-quality code: it's just here for the record.
 
 ## Builds and tests
-[![Build Status](https://travis-ci.org/tfeb/best-map.svg)](https://travis-ci.org/tfeb/best-map)
+I have removed the Travis CI tests: it should still pass any tests
+that it used to as nothing else has changed: `make test` in the
+`python` directory will run them.
 
-This [Travis CI](https://travis-ci.org/) status corresponds to
-[`github.com/tfeb/best-map`](https://github.com/tfeb/best-map) and may
-not completely correspond to the status of any other repo.
-
-Travis tests the Python package, but not the Racket module.  There are
-unit tests for it however, which you can run with `raco test` if you
-want (or `make test` in the `racket` directory).
+There are unit tests for the Racket module, which you can run with
+`raco test` if you want (or `make test` in the `racket` directory).
